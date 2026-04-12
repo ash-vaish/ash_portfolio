@@ -59,6 +59,7 @@ class _ProjectCarouselState extends State<ProjectCarousel> {
   late PageController _pageController;
   Timer? _timer;
   final int _initialPage = 99999 ~/ 2;
+  double _currentPage = 99999 / 2;
 
   @override
   void initState() {
@@ -67,6 +68,13 @@ class _ProjectCarouselState extends State<ProjectCarousel> {
       initialPage: _initialPage,
       viewportFraction: 0.55,
     );
+    _pageController.addListener(() {
+      if (mounted) {
+        setState(() {
+          _currentPage = _pageController.page ?? _initialPage.toDouble();
+        });
+      }
+    });
     _startTimer();
   }
 
@@ -107,17 +115,21 @@ class _ProjectCarouselState extends State<ProjectCarousel> {
         return false;
       },
       child: SizedBox(
-        height: 220,
+        height: 230, // Increased height to prevent clipping when cards transform upwards
         child: PageView.builder(
           controller: _pageController,
+          clipBehavior: Clip.none, // Allow children to draw outside bounds if needed
           itemCount: 99999,
           itemBuilder: (context, index) {
             final projectIndex = index % PortfolioData.projects.length;
+            final isCentered = (index - _currentPage).abs() < 0.5;
+
             return Padding(
               padding: const EdgeInsets.only(right: 10.0),
               child: ProjectTile(
                 data: PortfolioData.projects[projectIndex],
                 width: double.infinity,
+                forceHover: isCentered,
               ),
             );
           },

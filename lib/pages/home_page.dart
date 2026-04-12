@@ -66,11 +66,11 @@ class HomePage extends StatelessWidget {
       TextSpan(
         text: "// ",
         children: [
-          const TextSpan(
-            text: "Flutter Developer",
-            style: TextStyle(color: AppColors.dartTeal),
+          TextSpan(
+            text: PortfolioData.heroComment.split(' · ').first,
+            style: const TextStyle(color: AppColors.dartTeal),
           ),
-          const TextSpan(text: " · 4+ years · Noida, IN"),
+          TextSpan(text: " · ${PortfolioData.heroComment.split(' · ').sublist(1).join(' · ')}"),
         ],
       ),
       style: GoogleFonts.firaCode(
@@ -152,25 +152,17 @@ class HomePage extends StatelessWidget {
       constraints: maxWidth != null ? BoxConstraints(maxWidth: maxWidth) : null,
       child: Text.rich(
         TextSpan(
-          text: "Building ",
+          text: PortfolioData.heroTaglineStart,
           children: [
-            const TextSpan(
-              text: "production-grade",
-              style: TextStyle(
+            TextSpan(
+              text: PortfolioData.heroTaglineBold,
+              style: const TextStyle(
                 color: AppColors.textPrimary,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const TextSpan(
-              text:
-                  " cross-platform apps. From AI tutors to government portals — ",
-            ),
-            const TextSpan(
-              text: "real apps, real users.",
-              style: TextStyle(
-                color: AppColors.textPrimary,
-                fontWeight: FontWeight.bold,
-              ),
+            TextSpan(
+              text: PortfolioData.heroTaglineEnd,
             ),
           ],
         ),

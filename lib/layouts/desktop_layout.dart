@@ -129,7 +129,7 @@ class DesktopLayout extends StatelessWidget {
               const PulseRing(),
               const SizedBox(width: 8),
               Text(
-                "available_for_hire",
+                PortfolioData.statusText,
                 style: GoogleFonts.firaCode(
                   color: AppColors.dartTeal,
                   fontSize: 11,
@@ -170,7 +170,7 @@ class DesktopLayout extends StatelessWidget {
         ),
       ),
       child: Text(
-        "// Noida, IN\n// 4+ yrs · 4 apps live\n// Flutter · Dart · Firebase",
+        PortfolioData.sidebarFooter,
         style: GoogleFonts.firaCode(
           color: AppColors.textMuted,
           fontSize: 11,

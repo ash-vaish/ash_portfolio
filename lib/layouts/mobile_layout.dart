@@ -75,7 +75,7 @@ class MobileLayout extends StatelessWidget {
                   ),
                   const SizedBox(width: 6),
                   Text(
-                    "available_for_hire",
+                    PortfolioData.statusText,
                     style: GoogleFonts.firaCode(
                       color: AppColors.dartTeal,
                       fontSize: 11,

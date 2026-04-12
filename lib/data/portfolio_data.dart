@@ -45,17 +45,20 @@ class ProjectData {
   final Color accentColor;
   final String title;
   final String subtitle;
-  final bool hasAppStore;
-  final bool hasPlayStore;
+  final String? appStoreUrl;
+  final String? playStoreUrl;
 
   ProjectData({
     required this.icon,
     required this.accentColor,
     required this.title,
     required this.subtitle,
-    this.hasAppStore = false,
-    this.hasPlayStore = false,
+    this.appStoreUrl,
+    this.playStoreUrl,
   });
+
+  bool get hasAppStore => appStoreUrl != null;
+  bool get hasPlayStore => playStoreUrl != null;
 }
 
 class SkillData {
@@ -87,6 +90,12 @@ class PortfolioData {
   static const String name = "Ashish Vaish";
   static const String initials = "AV";
   static const String roleTag = "flutter_developer.dart";
+  static const String statusText = "available_for_hire";
+  static const String heroComment = "Flutter Developer · 4+ years · Noida, IN";
+  static const String heroTaglineStart = "Building ";
+  static const String heroTaglineBold = "production-grade";
+  static const String heroTaglineEnd = " cross-platform apps. From AI tutors to government portals — real apps, real users.";
+  static const String sidebarFooter = "// Noida, IN\n// 4+ yrs · 4 apps live\n// Flutter · Dart · Firebase";
 
   static final List<PillData> pills = [
     PillData(dotColor: AppColors.flutterCyan, label: "iOS · Android · Web"),
@@ -142,23 +151,23 @@ class PortfolioData {
       accentColor: AppColors.flutterCyan,
       title: "Aaykar Setu",
       subtitle: "National IT office discovery + tax rules app",
-      hasPlayStore: true,
+      playStoreUrl: "https://play.google.com/store/apps/details?id=in.gov.incometax.aaykarsetu",
     ),
     ProjectData(
       icon: Icons.school_rounded,
       accentColor: AppColors.dartTeal,
       title: "uCertify Learn+",
       subtitle: "AI-powered e-learning with labs & test prep",
-      hasAppStore: true,
-      hasPlayStore: true,
+      appStoreUrl: "https://apps.apple.com/app/ucertify-learn/id123456789",
+      playStoreUrl: "https://play.google.com/store/apps/details?id=com.ucertify.learn",
     ),
     ProjectData(
       icon: Icons.monitor_heart_rounded,
       accentColor: AppColors.accentRed,
       title: "Carelink Connect",
       subtitle: "Real-time glucose monitoring for Medtronic",
-      hasAppStore: true,
-      hasPlayStore: true,
+      appStoreUrl: "https://apps.apple.com/app/carelink-connect/id999999999",
+      playStoreUrl: "https://play.google.com/store/apps/details?id=com.medtronic.carelink.connect",
     ),
     ProjectData(
       icon: Icons.psychology_rounded,
