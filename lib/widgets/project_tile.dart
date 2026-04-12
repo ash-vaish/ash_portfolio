@@ -8,7 +8,14 @@ class ProjectTile extends StatefulWidget {
   final ProjectData data;
   final double width;
   final bool forceHover;
-  const ProjectTile({super.key, required this.data, required this.width, this.forceHover = false});
+  final bool enableHover;
+  const ProjectTile({
+    super.key,
+    required this.data,
+    required this.width,
+    this.forceHover = false,
+    this.enableHover = true,
+  });
 
   @override
   State<ProjectTile> createState() => _ProjectTileState();
@@ -19,7 +26,7 @@ class _ProjectTileState extends State<ProjectTile> {
 
   @override
   Widget build(BuildContext context) {
-    final bool active = isHovered || widget.forceHover;
+    final bool active = (widget.enableHover && isHovered) || widget.forceHover;
 
     return MouseRegion(
       onEnter: (_) => setState(() => isHovered = true),

@@ -130,6 +130,7 @@ class _ProjectCarouselState extends State<ProjectCarousel> {
                 data: PortfolioData.projects[projectIndex],
                 width: double.infinity,
                 forceHover: isCentered,
+                enableHover: false, // Disable mouse hover interaction in carousel to prevent multiple highlights
               ),
             );
           },
