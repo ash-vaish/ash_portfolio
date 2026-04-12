@@ -1,0 +1,46 @@
+name: Deploy Flutter Web to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 'stable'
+
+      - name: Enable web
+        run: flutter config --enable-web
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Build web
+        run: flutter build web --base-href "/ash_portfolio/"
+
+      - name: Prepare docs folder
+        run: |
+          rm -rf docs
+          mkdir docs
+          cp -r build/web/* docs/
+          cp docs/index.html docs/404.html
+
+      - name: Commit and push docs
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add docs
+          git commit -m "Auto deploy to GitHub Pages" || echo "No changes to commit"
+          git push
