@@ -84,17 +84,16 @@ class _ProjectTileState extends State<ProjectTile> {
               ),
             ),
             const Spacer(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
+            Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              alignment: WrapAlignment.start,
               children: [
                 if (widget.data.hasAppStore)
-                  Padding(
-                    padding: const EdgeInsets.only(right: 8.0),
-                    child: _StoreButton(
-                      icon: FontAwesomeIcons.apple,
-                      url: widget.data.appStoreUrl!,
-                      isActive: active,
-                    ),
+                  _StoreButton(
+                    icon: FontAwesomeIcons.apple,
+                    url: widget.data.appStoreUrl!,
+                    isActive: active,
                   ),
                 if (widget.data.hasPlayStore)
                   _StoreButton(

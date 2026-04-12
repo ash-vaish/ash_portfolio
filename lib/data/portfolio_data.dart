@@ -218,7 +218,8 @@ class PortfolioData {
 
   static final List<NavTabData> navTabs = [
     NavTabData(id: "home", icon: Icons.home_rounded, label: "home"),
-    NavTabData(id: "work", icon: Icons.grid_view_rounded, label: "work"),
+    NavTabData(id: "work", icon: Icons.work_rounded, label: "work"),
+    NavTabData(id: "projects", icon: Icons.grid_view_rounded, label: "projects"),
     NavTabData(id: "skills", icon: Icons.terminal_rounded, label: "skills"),
     NavTabData(id: "contact", icon: Icons.mail_rounded, label: "contact"),
   ];

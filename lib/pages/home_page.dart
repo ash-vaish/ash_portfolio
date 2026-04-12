@@ -119,29 +119,35 @@ class HomePage extends StatelessWidget {
           ],
         ),
         const SizedBox(width: 16),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              PortfolioData.name,
-              style: TextStyle(
-                color: AppColors.textPrimary,
-                fontSize: isDesktop ? 36 : 26,
-                fontWeight: FontWeight.w800,
-                letterSpacing: -0.02,
-                height: 1,
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                PortfolioData.name,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  color: AppColors.textPrimary,
+                  fontSize: isDesktop ? 36 : 26,
+                  fontWeight: FontWeight.w800,
+                  letterSpacing: -0.02,
+                  height: 1,
+                ),
               ),
-            ),
-            const SizedBox(height: 4),
-            Text(
-              PortfolioData.roleTag,
-              style: GoogleFonts.firaCode(
-                color: AppColors.flutterCyan,
-                fontSize: isDesktop ? 14 : 13,
-                letterSpacing: 0.04,
+              const SizedBox(height: 4),
+              Text(
+                PortfolioData.roleTag,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: GoogleFonts.firaCode(
+                  color: AppColors.flutterCyan,
+                  fontSize: isDesktop ? 14 : 13,
+                  letterSpacing: 0.04,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ],
     );

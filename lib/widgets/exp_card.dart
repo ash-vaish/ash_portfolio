@@ -73,27 +73,31 @@ class _ExpCardState extends State<ExpCard> {
                         ),
                       ),
                       const SizedBox(width: 8),
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                        decoration: BoxDecoration(
-                          color: widget.data.badgeType == BadgeType.live
-                              ? AppColors.dartTeal.withValues(alpha: 0.15)
-                              : Colors.white.withValues(alpha: 0.04),
-                          borderRadius: BorderRadius.circular(100),
-                          border: Border.all(
+                      Flexible(
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                          decoration: BoxDecoration(
                             color: widget.data.badgeType == BadgeType.live
-                                ? AppColors.dartTeal.withValues(alpha: 0.3)
-                                : AppColors.border,
+                                ? AppColors.dartTeal.withValues(alpha: 0.15)
+                                : Colors.white.withValues(alpha: 0.04),
+                            borderRadius: BorderRadius.circular(100),
+                            border: Border.all(
+                              color: widget.data.badgeType == BadgeType.live
+                                  ? AppColors.dartTeal.withValues(alpha: 0.3)
+                                  : AppColors.border,
+                            ),
                           ),
-                        ),
-                        child: Text(
-                          widget.data.badge,
-                          style: GoogleFonts.firaCode(
-                            color: widget.data.badgeType == BadgeType.live
-                                ? AppColors.dartTeal
-                                : AppColors.textMuted,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w400,
+                          child: Text(
+                            widget.data.badge,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: GoogleFonts.firaCode(
+                              color: widget.data.badgeType == BadgeType.live
+                                  ? AppColors.dartTeal
+                                  : AppColors.textMuted,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w400,
+                            ),
                           ),
                         ),
                       ),

@@ -7,7 +7,8 @@ import '../data/portfolio_data.dart';
 
 class WorkPage extends StatelessWidget {
   final bool isDesktop;
-  const WorkPage({super.key, this.isDesktop = false});
+  final GlobalKey? projectsKey;
+  const WorkPage({super.key, this.isDesktop = false, this.projectsKey});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,8 @@ class WorkPage extends StatelessWidget {
             children: PortfolioData.experience.map((exp) => ExpCard(data: exp)).toList(),
           ),
         ),
-        const SizedBox(height: 24),
+        const SizedBox(height: 80),
+        SizedBox(key: projectsKey),
         if (isDesktop) const DesktopPageTitle(label: "projects"),
         if (!isDesktop) const SectionLabel(label: "projects"),
         if (isDesktop)
@@ -31,9 +33,9 @@ class WorkPage extends StatelessWidget {
             physics: const NeverScrollableScrollPhysics(),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
-              mainAxisSpacing: 10,
-              crossAxisSpacing: 10,
-              mainAxisExtent: 180,
+              mainAxisSpacing: 20,
+              crossAxisSpacing: 20,
+              mainAxisExtent: 190,
             ),
             itemCount: PortfolioData.projects.length,
             itemBuilder: (context, index) => ProjectTile(
@@ -125,12 +127,12 @@ class _ProjectCarouselState extends State<ProjectCarousel> {
             final isCentered = (index - _currentPage).abs() < 0.5;
 
             return Padding(
-              padding: const EdgeInsets.only(right: 10.0),
+              padding: const EdgeInsets.only(right: 12.0),
               child: ProjectTile(
                 data: PortfolioData.projects[projectIndex],
                 width: double.infinity,
                 forceHover: isCentered,
-                enableHover: false, // Disable mouse hover interaction in carousel to prevent multiple highlights
+                enableHover: false,
               ),
             );
           },

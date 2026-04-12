@@ -15,6 +15,7 @@ class MobileLayout extends StatelessWidget {
   final ScrollController scrollController;
   final GlobalKey homeKey;
   final GlobalKey workKey;
+  final GlobalKey projectsKey;
   final GlobalKey skillsKey;
   final GlobalKey contactKey;
   final AnimationController skillsAnimationController;
@@ -26,6 +27,7 @@ class MobileLayout extends StatelessWidget {
     required this.scrollController,
     required this.homeKey,
     required this.workKey,
+    required this.projectsKey,
     required this.skillsKey,
     required this.contactKey,
     required this.skillsAnimationController,
@@ -65,25 +67,30 @@ class MobileLayout extends StatelessWidget {
                   fontSize: 18,
                 ),
               ),
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const SizedBox(
-                    width: 8,
-                    height: 8,
-                    child: PulseRing(),
-                  ),
-                  const SizedBox(width: 6),
-                  Text(
-                    PortfolioData.statusText,
-                    style: GoogleFonts.firaCode(
-                      color: AppColors.dartTeal,
-                      fontSize: 11,
+              Flexible(
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    const SizedBox(
+                      width: 8,
+                      height: 8,
+                      child: PulseRing(),
                     ),
-                    overflow: TextOverflow.visible,
-                    softWrap: false,
-                  ),
-                ],
+                    const SizedBox(width: 6),
+                    Flexible(
+                      child: Text(
+                        PortfolioData.statusText,
+                        style: GoogleFonts.firaCode(
+                          color: AppColors.dartTeal,
+                          fontSize: 11,
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                        softWrap: false,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
@@ -94,7 +101,7 @@ class MobileLayout extends StatelessWidget {
         child: Column(
           children: [
             HomePage(key: homeKey, isDesktop: false),
-            WorkPage(key: workKey, isDesktop: false),
+            WorkPage(key: workKey, projectsKey: projectsKey, isDesktop: false),
             SkillsPage(
               key: skillsKey,
               isDesktop: false,
@@ -132,33 +139,37 @@ class MobileLayout extends StatelessWidget {
                 final tab = PortfolioData.navTabs[index];
                 final isSelected = activeTab == index;
 
-                return GestureDetector(
-                  onTap: () => onTabTap(index),
-                  behavior: HitTestBehavior.opaque,
-                  child: AnimatedContainer(
-                    duration: const Duration(milliseconds: 200),
-                    padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 18),
-                    decoration: BoxDecoration(
-                      color: isSelected ? AppColors.flutterCyan.withValues(alpha: 0.1) : Colors.transparent,
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(
-                          tab.icon,
-                          size: 20,
-                          color: isSelected ? AppColors.flutterCyan : AppColors.textMuted,
-                        ),
-                        const SizedBox(height: 3),
-                        Text(
-                          tab.label,
-                          style: GoogleFonts.firaCode(
-                            fontSize: 11,
+                return Expanded(
+                  child: GestureDetector(
+                    onTap: () => onTabTap(index),
+                    behavior: HitTestBehavior.opaque,
+                    child: AnimatedContainer(
+                      duration: const Duration(milliseconds: 200),
+                      padding: const EdgeInsets.symmetric(vertical: 8),
+                      decoration: BoxDecoration(
+                        color: isSelected ? AppColors.flutterCyan.withValues(alpha: 0.1) : Colors.transparent,
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                            tab.icon,
+                            size: 20,
                             color: isSelected ? AppColors.flutterCyan : AppColors.textMuted,
                           ),
-                        ),
-                      ],
+                          const SizedBox(height: 3),
+                          Text(
+                            tab.label,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: GoogleFonts.firaCode(
+                              fontSize: 11,
+                              color: isSelected ? AppColors.flutterCyan : AppColors.textMuted,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 );

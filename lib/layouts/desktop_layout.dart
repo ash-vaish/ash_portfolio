@@ -14,6 +14,7 @@ class DesktopLayout extends StatelessWidget {
   final ScrollController scrollController;
   final GlobalKey homeKey;
   final GlobalKey workKey;
+  final GlobalKey projectsKey;
   final GlobalKey skillsKey;
   final GlobalKey contactKey;
   final AnimationController skillsAnimationController;
@@ -25,6 +26,7 @@ class DesktopLayout extends StatelessWidget {
     required this.scrollController,
     required this.homeKey,
     required this.workKey,
+    required this.projectsKey,
     required this.skillsKey,
     required this.contactKey,
     required this.skillsAnimationController,
@@ -49,7 +51,11 @@ class DesktopLayout extends StatelessWidget {
                       children: [
                         HomePage(key: homeKey, isDesktop: true),
                         const SizedBox(height: 80),
-                        WorkPage(key: workKey, isDesktop: true),
+                        WorkPage(
+                          key: workKey,
+                          projectsKey: projectsKey,
+                          isDesktop: true,
+                        ),
                         const SizedBox(height: 80),
                         SkillsPage(
                           key: skillsKey,

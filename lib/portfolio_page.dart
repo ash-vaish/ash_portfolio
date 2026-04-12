@@ -15,6 +15,7 @@ class _PortfolioPageState extends State<PortfolioPage> with SingleTickerProvider
 
   final GlobalKey _homeKey = GlobalKey();
   final GlobalKey _workKey = GlobalKey();
+  final GlobalKey _projectsKey = GlobalKey();
   final GlobalKey _skillsKey = GlobalKey();
   final GlobalKey _contactKey = GlobalKey();
 
@@ -26,7 +27,7 @@ class _PortfolioPageState extends State<PortfolioPage> with SingleTickerProvider
   @override
   void initState() {
     super.initState();
-    _keys = [_homeKey, _workKey, _skillsKey, _contactKey];
+    _keys = [_homeKey, _workKey, _projectsKey, _skillsKey, _contactKey];
     _scrollController.addListener(_onScroll);
     _skillsAnimationController = AnimationController(
       vsync: this,
@@ -52,26 +53,20 @@ class _PortfolioPageState extends State<PortfolioPage> with SingleTickerProvider
 
     // Special case: bottom of the page
     if (scrollOffset >= maxScroll - 50) {
-      if (_activeTab != 3) {
-        setState(() => _activeTab = 3);
+      if (_activeTab != _keys.length - 1) {
+        setState(() => _activeTab = _keys.length - 1);
       }
       return;
     }
 
-    int newActiveTab = 0;
-    const triggerThreshold = 120.0;
+    int newActiveTab = _activeTab;
+    const triggerThreshold = 150.0;
 
     for (int i = 0; i < _keys.length; i++) {
       final context = _keys[i].currentContext;
       if (context != null) {
         final box = context.findRenderObject() as RenderBox;
         final position = box.localToGlobal(Offset.zero);
-        // The Y position of the section relative to the top of the viewport
-        // is (box.localToGlobal(Offset.zero).dy).
-        // However, since we are in a ScrollView, we want to know its position
-        // relative to the scroll.
-        // Actually, localToGlobal(Offset.zero).dy already gives us the distance
-        // from the top of the screen.
         
         if (position.dy <= triggerThreshold) {
           newActiveTab = i;
@@ -131,6 +126,7 @@ class _PortfolioPageState extends State<PortfolioPage> with SingleTickerProvider
             scrollController: _scrollController,
             homeKey: _homeKey,
             workKey: _workKey,
+            projectsKey: _projectsKey,
             skillsKey: _skillsKey,
             contactKey: _contactKey,
             skillsAnimationController: _skillsAnimationController,
@@ -142,6 +138,7 @@ class _PortfolioPageState extends State<PortfolioPage> with SingleTickerProvider
             scrollController: _scrollController,
             homeKey: _homeKey,
             workKey: _workKey,
+            projectsKey: _projectsKey,
             skillsKey: _skillsKey,
             contactKey: _contactKey,
             skillsAnimationController: _skillsAnimationController,
