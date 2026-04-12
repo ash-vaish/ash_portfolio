@@ -39,48 +39,55 @@ class MobileLayout extends StatelessWidget {
         backgroundColor: AppColors.surface1,
         elevation: 0,
         scrolledUnderElevation: 0,
+        titleSpacing: 0,
         shape: const Border(
           bottom: BorderSide(color: AppColors.border, width: 1),
         ),
-        title: Row(
-          children: [
-            Text.rich(
-              TextSpan(
-                text: "ash",
+        title: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text.rich(
+                TextSpan(
+                  text: "ash",
+                  children: [
+                    TextSpan(
+                      text: ".",
+                      style: TextStyle(color: AppColors.flutterCyan),
+                    ),
+                    const TextSpan(text: "dev"),
+                  ],
+                ),
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w700,
+                  fontSize: 18,
+                ),
+              ),
+              Row(
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  TextSpan(
-                    text: ".",
-                    style: TextStyle(color: AppColors.flutterCyan),
+                  const SizedBox(
+                    width: 8,
+                    height: 8,
+                    child: PulseRing(),
                   ),
-                  const TextSpan(text: "dev"),
+                  const SizedBox(width: 6),
+                  Text(
+                    "available_for_hire",
+                    style: GoogleFonts.firaCode(
+                      color: AppColors.dartTeal,
+                      fontSize: 11,
+                    ),
+                    overflow: TextOverflow.visible,
+                    softWrap: false,
+                  ),
                 ],
               ),
-              style: const TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.w700,
-                fontSize: 18,
-              ),
-            ),
-          ],
-        ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 20.0),
-            child: Row(
-              children: [
-                const PulseRing(),
-                const SizedBox(width: 8),
-                Text(
-                  "available",
-                  style: GoogleFonts.firaCode(
-                    color: AppColors.dartTeal,
-                    fontSize: 12,
-                  ),
-                ),
-              ],
-            ),
+            ],
           ),
-        ],
+        ),
       ),
       body: SingleChildScrollView(
         controller: scrollController,

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import '../widgets/section_label.dart';
 import '../widgets/exp_card.dart';
@@ -32,7 +33,7 @@ class WorkPage extends StatelessWidget {
               crossAxisCount: 2,
               mainAxisSpacing: 10,
               crossAxisSpacing: 10,
-              mainAxisExtent: 180, // Approximate height as per requirement
+              mainAxisExtent: 180,
             ),
             itemCount: PortfolioData.projects.length,
             itemBuilder: (context, index) => ProjectTile(
@@ -41,20 +42,87 @@ class WorkPage extends StatelessWidget {
             ),
           )
         else
-          SizedBox(
-            height: 180,
-            child: ListView.separated(
-              scrollDirection: Axis.horizontal,
-              physics: const BouncingScrollPhysics(),
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              itemCount: PortfolioData.projects.length,
-              separatorBuilder: (context, index) => const SizedBox(width: 10),
-              itemBuilder: (context, index) {
-                return ProjectTile(data: PortfolioData.projects[index], width: 200);
-              },
-            ),
-          ),
+          const ProjectCarousel(),
       ],
+    );
+  }
+}
+
+class ProjectCarousel extends StatefulWidget {
+  const ProjectCarousel({super.key});
+
+  @override
+  State<ProjectCarousel> createState() => _ProjectCarouselState();
+}
+
+class _ProjectCarouselState extends State<ProjectCarousel> {
+  late PageController _pageController;
+  Timer? _timer;
+  final int _initialPage = 99999 ~/ 2;
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController(
+      initialPage: _initialPage,
+      viewportFraction: 0.55,
+    );
+    _startTimer();
+  }
+
+  void _startTimer() {
+    _timer = Timer.periodic(const Duration(seconds: 3), (timer) {
+      if (_pageController.hasClients) {
+        _pageController.nextPage(
+          duration: const Duration(milliseconds: 500),
+          curve: Curves.easeInOut,
+        );
+      }
+    });
+  }
+
+  void _resetTimer() {
+    _timer?.cancel();
+    Future.delayed(const Duration(seconds: 3), () {
+      if (mounted) _startTimer();
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return NotificationListener<ScrollNotification>(
+      onNotification: (notification) {
+        if (notification is ScrollStartNotification) {
+          _timer?.cancel();
+        } else if (notification is ScrollEndNotification) {
+          _resetTimer();
+        }
+        return false;
+      },
+      child: SizedBox(
+        height: 220,
+        child: PageView.builder(
+          controller: _pageController,
+          itemCount: 99999,
+          itemBuilder: (context, index) {
+            final projectIndex = index % PortfolioData.projects.length;
+            return Padding(
+              padding: const EdgeInsets.only(right: 10.0),
+              child: ProjectTile(
+                data: PortfolioData.projects[projectIndex],
+                width: double.infinity,
+              ),
+            );
+          },
+        ),
+      ),
     );
   }
 }

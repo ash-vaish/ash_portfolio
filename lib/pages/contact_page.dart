@@ -30,7 +30,7 @@ class ContactPage extends StatelessWidget {
         crossAxisCount: 2,
         crossAxisSpacing: 10,
         mainAxisSpacing: 10,
-        mainAxisExtent: 80, // Compact height
+        mainAxisExtent: 80, // Fixed row height of 80px to prevent overflow
       ),
       itemCount: PortfolioData.contacts.length,
       itemBuilder: (context, index) => ContactItem(

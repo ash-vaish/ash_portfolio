@@ -23,62 +23,72 @@ class _ProjectTileState extends State<ProjectTile> {
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
         width: widget.width,
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(16),
         transform: isHovered ? Matrix4.translationValues(0.0, -3.0, 0.0) : Matrix4.identity(),
         decoration: BoxDecoration(
-          color: AppColors.surface1,
+          color: AppColors.surface2,
           borderRadius: BorderRadius.circular(18),
           border: Border.all(
             color: isHovered ? widget.data.accentColor.withValues(alpha: 0.5) : AppColors.border,
             width: 1,
           ),
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
-              width: 40,
-              height: 40,
-              decoration: BoxDecoration(
-                color: widget.data.accentColor.withValues(alpha: 0.1),
-                borderRadius: BorderRadius.circular(12),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(18),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                width: 38,
+                height: 38,
+                decoration: BoxDecoration(
+                  color: widget.data.accentColor.withValues(alpha: 0.1),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                alignment: Alignment.center,
+                child: Icon(
+                  widget.data.icon,
+                  size: 20,
+                  color: widget.data.accentColor,
+                ),
               ),
-              alignment: Alignment.center,
-              child: Icon(
-                widget.data.icon,
-                size: 20,
-                color: widget.data.accentColor,
+              const SizedBox(height: 12),
+              Text(
+                widget.data.title,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                softWrap: true,
+                style: const TextStyle(
+                  color: AppColors.textPrimary,
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            const SizedBox(height: 14),
-            Text(
-              widget.data.title,
-              style: const TextStyle(
-                color: AppColors.textPrimary,
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
+              const SizedBox(height: 6),
+              Text(
+                widget.data.subtitle,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                softWrap: true,
+                style: const TextStyle(
+                  color: AppColors.textMuted,
+                  fontSize: 12,
+                  height: 1.5,
+                ),
               ),
-            ),
-            const SizedBox(height: 6),
-            Text(
-              widget.data.subtitle,
-              style: const TextStyle(
-                color: AppColors.textMuted,
-                fontSize: 13,
-                height: 1.5,
+              const SizedBox(height: 10),
+              Wrap(
+                spacing: 4,
+                runSpacing: 4,
+                children: [
+                  if (widget.data.hasAppStore) _buildStoreBadge("App Store"),
+                  if (widget.data.hasPlayStore) _buildStoreBadge("Play Store"),
+                ],
               ),
-            ),
-            const SizedBox(height: 12),
-            Wrap(
-              spacing: 6,
-              runSpacing: 6,
-              children: [
-                if (widget.data.hasAppStore) _buildStoreBadge("App Store"),
-                if (widget.data.hasPlayStore) _buildStoreBadge("Play Store"),
-              ],
-            ),
-          ],
+              const SizedBox(height: 12),
+            ],
+          ),
         ),
       ),
     );
@@ -94,6 +104,8 @@ class _ProjectTileState extends State<ProjectTile> {
       ),
       child: Text(
         label,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
         style: GoogleFonts.firaCode(
           fontSize: 10,
           color: AppColors.textMuted,
