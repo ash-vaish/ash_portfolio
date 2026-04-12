@@ -17,6 +17,7 @@ class MobileLayout extends StatelessWidget {
   final GlobalKey workKey;
   final GlobalKey skillsKey;
   final GlobalKey contactKey;
+  final AnimationController skillsAnimationController;
 
   const MobileLayout({
     super.key,
@@ -27,6 +28,7 @@ class MobileLayout extends StatelessWidget {
     required this.workKey,
     required this.skillsKey,
     required this.contactKey,
+    required this.skillsAnimationController,
   });
 
   @override
@@ -86,7 +88,11 @@ class MobileLayout extends StatelessWidget {
           children: [
             HomePage(key: homeKey, isDesktop: false),
             WorkPage(key: workKey, isDesktop: false),
-            SkillsPage(key: skillsKey, isDesktop: false),
+            SkillsPage(
+              key: skillsKey,
+              isDesktop: false,
+              animationController: skillsAnimationController,
+            ),
             ContactPage(key: contactKey, isDesktop: false),
             const SizedBox(height: 100), // Extra space for bottom nav
           ],

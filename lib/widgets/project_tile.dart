@@ -24,7 +24,7 @@ class _ProjectTileState extends State<ProjectTile> {
         duration: const Duration(milliseconds: 200),
         width: widget.width,
         padding: const EdgeInsets.all(20),
-        transform: isHovered ? (Matrix4.identity()..translate(0.0, -3.0)) : Matrix4.identity(),
+        transform: isHovered ? Matrix4.translationValues(0.0, -3.0, 0.0) : Matrix4.identity(),
         decoration: BoxDecoration(
           color: AppColors.surface1,
           borderRadius: BorderRadius.circular(18),
@@ -35,13 +35,14 @@ class _ProjectTileState extends State<ProjectTile> {
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
           children: [
             Container(
-              width: 36,
-              height: 36,
+              width: 40,
+              height: 40,
               decoration: BoxDecoration(
                 color: widget.data.accentColor.withValues(alpha: 0.1),
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(12),
               ),
               alignment: Alignment.center,
               child: Icon(
@@ -50,7 +51,7 @@ class _ProjectTileState extends State<ProjectTile> {
                 color: widget.data.accentColor,
               ),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 14),
             Text(
               widget.data.title,
               style: const TextStyle(
@@ -59,19 +60,19 @@ class _ProjectTileState extends State<ProjectTile> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 4),
+            const SizedBox(height: 6),
             Text(
               widget.data.subtitle,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
               style: const TextStyle(
                 color: AppColors.textMuted,
-                fontSize: 12,
-                height: 1.4,
+                fontSize: 13,
+                height: 1.5,
               ),
             ),
-            const Spacer(),
-            Row(
+            const SizedBox(height: 12),
+            Wrap(
+              spacing: 6,
+              runSpacing: 6,
               children: [
                 if (widget.data.hasAppStore) _buildStoreBadge("App Store"),
                 if (widget.data.hasPlayStore) _buildStoreBadge("Play Store"),
@@ -85,17 +86,16 @@ class _ProjectTileState extends State<ProjectTile> {
 
   Widget _buildStoreBadge(String label) {
     return Container(
-      margin: const EdgeInsets.only(right: 6),
-      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
       decoration: BoxDecoration(
-        color: AppColors.surface2,
-        borderRadius: BorderRadius.circular(4),
+        color: AppColors.surface3,
+        borderRadius: BorderRadius.circular(6),
         border: Border.all(color: AppColors.border),
       ),
       child: Text(
         label,
         style: GoogleFonts.firaCode(
-          fontSize: 7,
+          fontSize: 10,
           color: AppColors.textMuted,
         ),
       ),

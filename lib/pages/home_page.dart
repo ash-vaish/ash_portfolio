@@ -227,11 +227,8 @@ class HomePage extends StatelessWidget {
       return Column(
         children: PortfolioData.metrics.map((m) {
           return Padding(
-            padding: const EdgeInsets.only(bottom: 8.0),
-            child: SizedBox(
-              width: 100,
-              child: MetricCard(data: m, isDesktop: true),
-            ),
+            padding: const EdgeInsets.only(bottom: 12.0),
+            child: MetricCard(data: m, isDesktop: true),
           );
         }).toList(),
       );

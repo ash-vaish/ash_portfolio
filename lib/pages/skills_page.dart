@@ -5,7 +5,8 @@ import '../data/portfolio_data.dart';
 
 class SkillsPage extends StatelessWidget {
   final bool isDesktop;
-  const SkillsPage({super.key, this.isDesktop = false});
+  final AnimationController? animationController;
+  const SkillsPage({super.key, this.isDesktop = false, this.animationController});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,17 @@ class SkillsPage extends StatelessWidget {
             ),
             itemCount: PortfolioData.skills.length,
             itemBuilder: (context, index) {
-              return SkillCard(skill: PortfolioData.skills[index]);
+              return SkillCard(
+                skill: PortfolioData.skills[index],
+                animation: animationController != null
+                    ? Tween<double>(begin: 0.0, end: PortfolioData.skills[index].pct / 100).animate(
+                        CurvedAnimation(
+                          parent: animationController!,
+                          curve: Curves.easeOut,
+                        ),
+                      )
+                    : null,
+              );
             },
           ),
         ),

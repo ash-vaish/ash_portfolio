@@ -5,12 +5,13 @@ import '../data/portfolio_data.dart';
 
 class SkillCard extends StatelessWidget {
   final SkillData skill;
-  const SkillCard({super.key, required this.skill});
+  final Animation<double>? animation;
+  const SkillCard({super.key, required this.skill, this.animation});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: BoxDecoration(
         color: AppColors.surface2,
         borderRadius: BorderRadius.circular(16),
@@ -18,6 +19,7 @@ class SkillCard extends StatelessWidget {
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -44,19 +46,34 @@ class SkillCard extends StatelessWidget {
             height: 4,
             width: double.infinity,
             decoration: BoxDecoration(
-              color: const Color(0xFF1E1F2E),
+              color: AppColors.surface3,
               borderRadius: BorderRadius.circular(2),
             ),
             alignment: Alignment.centerLeft,
-            child: FractionallySizedBox(
-              widthFactor: skill.pct / 100,
-              child: Container(
-                decoration: BoxDecoration(
-                  color: skill.barColor,
-                  borderRadius: BorderRadius.circular(2),
-                ),
-              ),
-            ),
+            child: animation != null
+                ? AnimatedBuilder(
+                    animation: animation!,
+                    builder: (context, child) {
+                      return FractionallySizedBox(
+                        widthFactor: animation!.value,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: skill.barColor,
+                            borderRadius: BorderRadius.circular(2),
+                          ),
+                        ),
+                      );
+                    },
+                  )
+                : FractionallySizedBox(
+                    widthFactor: skill.pct / 100,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: skill.barColor,
+                        borderRadius: BorderRadius.circular(2),
+                      ),
+                    ),
+                  ),
           ),
         ],
       ),

@@ -11,7 +11,9 @@ class MetricCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
+      width: isDesktop ? 110 : 90,
+      constraints: BoxConstraints(minWidth: isDesktop ? 100 : 90),
+      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 8),
       decoration: BoxDecoration(
         color: AppColors.surface1,
         borderRadius: BorderRadius.circular(20),
@@ -31,11 +33,14 @@ class MetricCard extends StatelessWidget {
           const SizedBox(height: 6),
           Text(
             data.label,
+            maxLines: 1,
+            overflow: TextOverflow.visible,
+            softWrap: false,
             textAlign: TextAlign.center,
             style: GoogleFonts.firaCode(
               color: AppColors.textMuted,
-              fontSize: isDesktop ? 12 : 10,
-              height: 1.4,
+              fontSize: 10,
+              letterSpacing: 0.5,
             ),
           ),
         ],

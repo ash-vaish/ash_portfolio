@@ -16,6 +16,7 @@ class DesktopLayout extends StatelessWidget {
   final GlobalKey workKey;
   final GlobalKey skillsKey;
   final GlobalKey contactKey;
+  final AnimationController skillsAnimationController;
 
   const DesktopLayout({
     super.key,
@@ -26,6 +27,7 @@ class DesktopLayout extends StatelessWidget {
     required this.workKey,
     required this.skillsKey,
     required this.contactKey,
+    required this.skillsAnimationController,
   });
 
   @override
@@ -49,7 +51,11 @@ class DesktopLayout extends StatelessWidget {
                         const SizedBox(height: 80),
                         WorkPage(key: workKey, isDesktop: true),
                         const SizedBox(height: 80),
-                        SkillsPage(key: skillsKey, isDesktop: true),
+                        SkillsPage(
+                          key: skillsKey,
+                          isDesktop: true,
+                          animationController: skillsAnimationController,
+                        ),
                         const SizedBox(height: 80),
                         ContactPage(key: contactKey, isDesktop: true),
                       ],

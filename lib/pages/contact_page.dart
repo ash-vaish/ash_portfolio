@@ -23,20 +23,33 @@ class ContactPage extends StatelessWidget {
   }
 
   Widget _buildDesktop() {
-    return GridView.count(
+    return GridView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
-      crossAxisCount: 2,
-      crossAxisSpacing: 10,
-      mainAxisSpacing: 10,
-      mainAxisExtent: 90,
-      children: PortfolioData.contacts.map((c) => ContactItem(data: c, isDesktop: true)).toList(),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        crossAxisSpacing: 10,
+        mainAxisSpacing: 10,
+        mainAxisExtent: 80, // Compact height
+      ),
+      itemCount: PortfolioData.contacts.length,
+      itemBuilder: (context, index) => ContactItem(
+        data: PortfolioData.contacts[index],
+        isDesktop: true,
+      ),
     );
   }
 
   Widget _buildMobile() {
-    return Column(
-      children: PortfolioData.contacts.map((c) => ContactItem(data: c)).toList(),
+    return ListView.separated(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      itemCount: PortfolioData.contacts.length,
+      separatorBuilder: (context, index) => const SizedBox(height: 10),
+      itemBuilder: (context, index) => ContactItem(
+        data: PortfolioData.contacts[index],
+        isDesktop: false,
+      ),
     );
   }
 }

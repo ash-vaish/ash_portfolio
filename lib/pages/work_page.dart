@@ -25,14 +25,20 @@ class WorkPage extends StatelessWidget {
         if (isDesktop) const DesktopPageTitle(label: "projects"),
         if (!isDesktop) const SectionLabel(label: "projects"),
         if (isDesktop)
-          GridView.count(
+          GridView.builder(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
-            crossAxisCount: 2,
-            childAspectRatio: 1.25,
-            mainAxisSpacing: 10,
-            crossAxisSpacing: 10,
-            children: PortfolioData.projects.map((p) => ProjectTile(data: p, width: double.infinity)).toList(),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              mainAxisSpacing: 10,
+              crossAxisSpacing: 10,
+              mainAxisExtent: 180, // Approximate height as per requirement
+            ),
+            itemCount: PortfolioData.projects.length,
+            itemBuilder: (context, index) => ProjectTile(
+              data: PortfolioData.projects[index],
+              width: double.infinity,
+            ),
           )
         else
           SizedBox(
@@ -44,7 +50,7 @@ class WorkPage extends StatelessWidget {
               itemCount: PortfolioData.projects.length,
               separatorBuilder: (context, index) => const SizedBox(width: 10),
               itemBuilder: (context, index) {
-                return ProjectTile(data: PortfolioData.projects[index], width: 220);
+                return ProjectTile(data: PortfolioData.projects[index], width: 200);
               },
             ),
           ),

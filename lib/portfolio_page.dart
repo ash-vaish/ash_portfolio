@@ -9,7 +9,7 @@ class PortfolioPage extends StatefulWidget {
   State<PortfolioPage> createState() => _PortfolioPageState();
 }
 
-class _PortfolioPageState extends State<PortfolioPage> {
+class _PortfolioPageState extends State<PortfolioPage> with SingleTickerProviderStateMixin {
   final ScrollController _scrollController = ScrollController();
   int _activeTab = 0;
 
@@ -20,17 +20,25 @@ class _PortfolioPageState extends State<PortfolioPage> {
 
   late List<GlobalKey> _keys;
 
+  late AnimationController _skillsAnimationController;
+  bool _skillsAnimated = false;
+
   @override
   void initState() {
     super.initState();
     _keys = [_homeKey, _workKey, _skillsKey, _contactKey];
     _scrollController.addListener(_onScroll);
+    _skillsAnimationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 1200),
+    );
   }
 
   @override
   void dispose() {
     _scrollController.removeListener(_onScroll);
     _scrollController.dispose();
+    _skillsAnimationController.dispose();
     super.dispose();
   }
 
@@ -76,6 +84,20 @@ class _PortfolioPageState extends State<PortfolioPage> {
         _activeTab = newActiveTab;
       });
     }
+
+    // Skills animation logic
+    if (!_skillsAnimated) {
+      final skillsContext = _skillsKey.currentContext;
+      if (skillsContext != null) {
+        final renderBox = skillsContext.findRenderObject() as RenderBox?;
+        final position = renderBox?.localToGlobal(Offset.zero);
+        final screenHeight = MediaQuery.of(context).size.height;
+        if (position != null && position.dy < screenHeight) {
+          _skillsAnimated = true;
+          _skillsAnimationController.forward();
+        }
+      }
+    }
   }
 
   void _scrollToSection(int index) async {
@@ -111,6 +133,7 @@ class _PortfolioPageState extends State<PortfolioPage> {
             workKey: _workKey,
             skillsKey: _skillsKey,
             contactKey: _contactKey,
+            skillsAnimationController: _skillsAnimationController,
           );
         } else {
           return DesktopLayout(
@@ -121,6 +144,7 @@ class _PortfolioPageState extends State<PortfolioPage> {
             workKey: _workKey,
             skillsKey: _skillsKey,
             contactKey: _contactKey,
+            skillsAnimationController: _skillsAnimationController,
           );
         }
       },
