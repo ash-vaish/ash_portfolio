@@ -1,0 +1,227 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Fira+Code:wght@300;400;500&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg:#08090E;--s1:#0F1017;--s2:#161720;--s3:#1E1F2E;
+  --flutter:#44D4FA;--dart:#3DC8A0;--acc:#FF6B6B;
+  --t1:#F0F2FF;--t2:#8B8FA8;--t3:#4A4D62;
+  --bd:rgba(255,255,255,0.07);
+}
+body{background:var(--bg);}
+.app{background:var(--bg);color:var(--t1);font-family:'Outfit',sans-serif;max-width:420px;margin:0 auto;min-height:100vh;position:relative;}
+
+.scanline{position:absolute;top:0;left:0;right:0;height:2px;background:rgba(68,212,250,0.6);animation:scan 4s linear infinite;pointer-events:none;z-index:10;}
+@keyframes scan{0%{top:-2px;}100%{top:100%;}}
+
+.topbar{background:var(--s1);padding:14px 20px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--bd);position:sticky;top:0;z-index:5;}
+.tb-brand{font-size:15px;font-weight:700;letter-spacing:-.01em;}
+.tb-brand span{color:var(--flutter);}
+.tb-status{display:flex;align-items:center;gap:6px;}
+.status-ring{width:8px;height:8px;border-radius:50%;border:1.5px solid var(--dart);position:relative;}
+.status-ring::after{content:'';position:absolute;inset:-3px;border-radius:50%;border:1px solid rgba(61,200,160,0.3);animation:ring-pulse 2s ease infinite;}
+@keyframes ring-pulse{0%,100%{transform:scale(1);opacity:1;}50%{transform:scale(1.4);opacity:0;}}
+.tb-tag{font-family:'Fira Code',monospace;font-size:10px;color:var(--dart);}
+
+.hero-wrap{padding:28px 20px 24px;position:relative;}
+.code-comment{font-family:'Fira Code',monospace;font-size:11px;color:var(--t3);margin-bottom:16px;line-height:1.6;}
+.code-comment span{color:var(--dart);}
+
+.avatar-row{display:flex;align-items:center;gap:16px;margin-bottom:20px;}
+.avatar{width:56px;height:56px;border-radius:18px;background:var(--s3);border:2px solid var(--flutter);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800;color:var(--flutter);flex-shrink:0;position:relative;}
+.avatar::after{content:'';position:absolute;inset:-4px;border-radius:22px;border:1px solid rgba(68,212,250,0.2);}
+.av-text .name{font-size:22px;font-weight:800;letter-spacing:-.02em;line-height:1;}
+.av-text .role{font-family:'Fira Code',monospace;font-size:11px;color:var(--flutter);margin-top:4px;letter-spacing:.04em;}
+
+.tagline{font-size:14px;color:var(--t2);line-height:1.7;margin-bottom:24px;font-weight:300;}
+.tagline strong{color:var(--t1);font-weight:600;}
+
+.pill-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;}
+.pill{display:flex;align-items:center;gap:6px;padding:7px 14px;border-radius:100px;border:1px solid var(--bd);background:var(--s2);font-family:'Fira Code',monospace;font-size:10px;color:var(--t2);}
+.pill-dot{width:5px;height:5px;border-radius:50%;}
+
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:8px;}
+.metric{background:var(--s2);border:1px solid var(--bd);border-radius:16px;padding:16px 12px;text-align:center;}
+.metric-val{font-size:26px;font-weight:800;line-height:1;}
+.metric-lbl{font-family:'Fira Code',monospace;font-size:9px;color:var(--t3);margin-top:4px;letter-spacing:.06em;}
+
+.sec-label{font-family:'Fira Code',monospace;font-size:10px;color:var(--t3);letter-spacing:.12em;padding:20px 20px 12px;display:flex;align-items:center;gap:8px;}
+.sec-label::before{content:'';display:inline-block;width:16px;height:1px;background:var(--flutter);}
+
+.exp-list{padding:0 20px;}
+.exp-card{background:var(--s1);border:1px solid var(--bd);border-radius:20px;padding:18px;margin-bottom:10px;display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start;transition:border-color .2s;}
+.exp-card:hover{border-color:rgba(68,212,250,0.25);}
+.exp-card.current{border-color:rgba(68,212,250,0.3);background:var(--s2);}
+.exp-icon{width:42px;height:42px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+.exp-icon.gov{background:rgba(68,212,250,0.1);}
+.exp-icon.edu{background:rgba(61,200,160,0.1);}
+.exp-icon.health{background:rgba(255,107,107,0.1);}
+.exp-body{}
+.exp-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:4px;}
+.exp-role{font-size:14px;font-weight:600;line-height:1.2;}
+.exp-badge{font-family:'Fira Code',monospace;font-size:8px;padding:2px 8px;border-radius:100px;white-space:nowrap;}
+.badge-live{background:rgba(61,200,160,0.15);color:var(--dart);border:1px solid rgba(61,200,160,0.3);}
+.badge-prev{background:rgba(255,255,255,0.04);color:var(--t3);border:1px solid var(--bd);}
+.exp-co{font-size:11px;color:var(--flutter);font-weight:500;margin-bottom:8px;}
+.exp-desc{font-size:11px;color:var(--t2);line-height:1.6;font-weight:300;}
+.exp-chips{display:flex;flex-wrap:wrap;gap:4px;margin-top:10px;}
+.exp-chip{font-family:'Fira Code',monospace;font-size:9px;padding:2px 8px;border-radius:6px;background:var(--s3);color:var(--t2);}
+
+.proj-scroll-wrap{padding:0 20px;overflow-x:auto;}
+.proj-scroll-wrap::-webkit-scrollbar{height:2px;}
+.proj-scroll-wrap::-webkit-scrollbar-thumb{background:var(--flutter);border-radius:1px;}
+.proj-row{display:flex;gap:10px;width:max-content;padding-bottom:8px;}
+.proj-tile{width:200px;background:var(--s2);border:1px solid var(--bd);border-radius:20px;padding:18px;flex-shrink:0;transition:border-color .2s,transform .2s;}
+.proj-tile:hover{transform:translateY(-3px);}
+.proj-tile.t1:hover{border-color:rgba(68,212,250,0.35);}
+.proj-tile.t2:hover{border-color:rgba(61,200,160,0.35);}
+.proj-tile.t3:hover{border-color:rgba(255,107,107,0.35);}
+.proj-tile.t4:hover{border-color:rgba(255,184,60,0.35);}
+.proj-ico{width:36px;height:36px;border-radius:12px;margin-bottom:12px;display:flex;align-items:center;justify-content:center;font-size:14px;}
+.ico1{background:rgba(68,212,250,0.12);}
+.ico2{background:rgba(61,200,160,0.12);}
+.ico3{background:rgba(255,107,107,0.12);}
+.ico4{background:rgba(255,184,60,0.12);}
+.proj-name{font-size:13px;font-weight:700;margin-bottom:4px;}
+.proj-sub{font-size:10px;color:var(--t2);line-height:1.5;margin-bottom:10px;font-weight:300;}
+.proj-store{display:flex;gap:4px;}
+.store-badge{font-family:'Fira Code',monospace;font-size:8px;padding:2px 6px;border-radius:4px;background:var(--s3);color:var(--t3);}
+
+.skills-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 20px;}
+.skill-row{background:var(--s2);border:1px solid var(--bd);border-radius:14px;padding:14px;}
+.sk-name{font-size:12px;font-weight:600;margin-bottom:8px;display:flex;justify-content:space-between;}
+.sk-pct{font-family:'Fira Code',monospace;font-size:10px;color:var(--flutter);}
+.sk-bar{height:3px;background:var(--s3);border-radius:2px;}
+.sk-fill{height:100%;border-radius:2px;}
+.fill-f{background:var(--flutter);}
+.fill-d{background:var(--dart);}
+.fill-a{background:var(--acc);}
+
+.bottom-nav{margin:28px 20px 20px;background:var(--s1);border:1px solid var(--bd);border-radius:24px;padding:10px;display:flex;justify-content:space-around;}
+.bnav{display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 18px;border-radius:16px;cursor:pointer;transition:background .2s;}
+.bnav.on{background:rgba(68,212,250,0.1);}
+.bnav-ico{font-size:16px;}
+.bnav-lbl{font-family:'Fira Code',monospace;font-size:9px;color:var(--t3);}
+.bnav.on .bnav-lbl{color:var(--flutter);}
+</style>
+
+<div class="app">
+  <div class="scanline"></div>
+
+  <div class="topbar">
+    <div class="tb-brand">ash<span>.</span>dev</div>
+    <div class="tb-status">
+      <div class="status-ring"></div>
+      <span class="tb-tag">available_for_hire</span>
+    </div>
+  </div>
+
+  <div class="hero-wrap">
+    <div class="code-comment">// <span>Flutter Developer</span> · 4+ years · Noida, IN</div>
+    <div class="avatar-row">
+      <div class="avatar">AV</div>
+      <div class="av-text">
+        <div class="name">Ashish Vaish</div>
+        <div class="role">flutter_developer.dart</div>
+      </div>
+    </div>
+    <p class="tagline">Building <strong>production-grade</strong> cross-platform apps. From AI tutors to government portals — <strong>real apps, real users.</strong></p>
+    <div class="pill-row">
+      <div class="pill"><div class="pill-dot" style="background:#44D4FA"></div>iOS · Android · Web</div>
+      <div class="pill"><div class="pill-dot" style="background:#3DC8A0"></div>Clean Architecture</div>
+      <div class="pill"><div class="pill-dot" style="background:#FF6B6B"></div>BloC · Riverpod</div>
+    </div>
+    <div class="metrics">
+      <div class="metric"><div class="metric-val" style="color:#44D4FA">4+</div><div class="metric-lbl">YRS EXP</div></div>
+      <div class="metric"><div class="metric-val" style="color:#3DC8A0">4</div><div class="metric-lbl">APPS LIVE</div></div>
+      <div class="metric"><div class="metric-val" style="color:#FF6B6B">3</div><div class="metric-lbl">COMPANIES</div></div>
+    </div>
+  </div>
+
+  <div class="sec-label">experience</div>
+  <div class="exp-list">
+    <div class="exp-card current">
+      <div class="exp-icon gov">🏛</div>
+      <div class="exp-body">
+        <div class="exp-top">
+          <div class="exp-role">Associate Consultant</div>
+          <span class="exp-badge badge-live">● live</span>
+        </div>
+        <div class="exp-co">Infosys × Income Tax Dept.</div>
+        <div class="exp-desc">Building Aaykar Setu (national IT app) & Ask Madhukar AI chatbot for tax law queries.</div>
+        <div class="exp-chips"><span class="exp-chip">Flutter</span><span class="exp-chip">Geo APIs</span><span class="exp-chip">AI</span><span class="exp-chip">Aug 2025–Now</span></div>
+      </div>
+    </div>
+    <div class="exp-card">
+      <div class="exp-icon edu">📚</div>
+      <div class="exp-body">
+        <div class="exp-top">
+          <div class="exp-role">Flutter Developer</div>
+          <span class="exp-badge badge-prev">2024–2025</span>
+        </div>
+        <div class="exp-co">uCertify Training & Learning</div>
+        <div class="exp-desc">Built uCertify Learn+ & AI Tutor. Improved LMS integration by 20%.</div>
+        <div class="exp-chips"><span class="exp-chip">Flutter</span><span class="exp-chip">Firebase</span><span class="exp-chip">BigQuery</span></div>
+      </div>
+    </div>
+    <div class="exp-card">
+      <div class="exp-icon health">❤️</div>
+      <div class="exp-body">
+        <div class="exp-top">
+          <div class="exp-role">Software Engineer L3</div>
+          <span class="exp-badge badge-prev">2021–2024</span>
+        </div>
+        <div class="exp-co">Zimetrics Technologies</div>
+        <div class="exp-desc">Carelink Connect for Medtronic. App size ↓10%, downloads ↑15%, reviews ↑1.5×.</div>
+        <div class="exp-chips"><span class="exp-chip">Flutter</span><span class="exp-chip">BloC</span><span class="exp-chip">FCM</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-label">projects</div>
+  <div class="proj-scroll-wrap">
+    <div class="proj-row">
+      <div class="proj-tile t1">
+        <div class="proj-ico ico1">🏛</div>
+        <div class="proj-name">Aaykar Setu</div>
+        <div class="proj-sub">National IT office discovery + tax rules app</div>
+        <div class="proj-store"><span class="store-badge">Govt.</span><span class="store-badge">Geo</span></div>
+      </div>
+      <div class="proj-tile t2">
+        <div class="proj-ico ico2">🎓</div>
+        <div class="proj-name">uCertify Learn+</div>
+        <div class="proj-sub">AI-powered e-learning with labs & test prep</div>
+        <div class="proj-store"><span class="store-badge">App Store</span><span class="store-badge">Play</span></div>
+      </div>
+      <div class="proj-tile t3">
+        <div class="proj-ico ico3">💉</div>
+        <div class="proj-name">Carelink Connect</div>
+        <div class="proj-sub">Real-time glucose monitoring for Medtronic</div>
+        <div class="proj-store"><span class="store-badge">App Store</span><span class="store-badge">Play</span></div>
+      </div>
+      <div class="proj-tile t4">
+        <div class="proj-ico ico4">🤖</div>
+        <div class="proj-name">Ask Madhukar</div>
+        <div class="proj-sub">AI chatbot for Indian tax law queries</div>
+        <div class="proj-store"><span class="store-badge">AI</span><span class="store-badge">LLM</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-label">skills</div>
+  <div class="skills-grid">
+    <div class="skill-row"><div class="sk-name">Flutter/Dart<span class="sk-pct">95%</span></div><div class="sk-bar"><div class="sk-fill fill-f" style="width:95%"></div></div></div>
+    <div class="skill-row"><div class="sk-name">Firebase<span class="sk-pct">90%</span></div><div class="sk-bar"><div class="sk-fill fill-d" style="width:90%"></div></div></div>
+    <div class="skill-row"><div class="sk-name">BloC/Riverpod<span class="sk-pct">88%</span></div><div class="sk-bar"><div class="sk-fill fill-f" style="width:88%"></div></div></div>
+    <div class="skill-row"><div class="sk-name">REST/Dio<span class="sk-pct">85%</span></div><div class="sk-bar"><div class="sk-fill fill-d" style="width:85%"></div></div></div>
+    <div class="skill-row"><div class="sk-name">Clean Arch<span class="sk-pct">83%</span></div><div class="sk-bar"><div class="sk-fill fill-a" style="width:83%"></div></div></div>
+    <div class="skill-row"><div class="sk-name">CI/CD<span class="sk-pct">78%</span></div><div class="sk-bar"><div class="sk-fill fill-f" style="width:78%"></div></div></div>
+  </div>
+
+  <div class="bottom-nav">
+    <div class="bnav on"><div class="bnav-ico">⌂</div><div class="bnav-lbl">home</div></div>
+    <div class="bnav"><div class="bnav-ico">◫</div><div class="bnav-lbl">work</div></div>
+    <div class="bnav"><div class="bnav-ico">◎</div><div class="bnav-lbl">skills</div></div>
+    <div class="bnav"><div class="bnav-ico">✉</div><div class="bnav-lbl">contact</div></div>
+  </div>
+</div>
