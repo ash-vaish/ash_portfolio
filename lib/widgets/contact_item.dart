@@ -18,23 +18,28 @@ class _ContactItemState extends State<ContactItem> {
   bool isHovered = false;
 
   void _handleTap() async {
+    final String label = widget.data.label.toLowerCase();
+    String value = widget.data.value;
     Uri? uri;
-    if (widget.data.label == 'Email') {
-      uri = Uri(scheme: 'mailto', path: widget.data.value);
-    } else if (widget.data.label == 'LinkedIn') {
-      uri = Uri.parse('https://linkedin.com/in/ashishvaish');
-    } else if (widget.data.label == 'GitHub') {
-      uri = Uri.parse('https://github.com/ashishvaish');
+
+    if (label == 'email') {
+      uri = Uri.parse('mailto:$value');
+    } else {
+      // For LinkedIn and GitHub, ensure they have the https:// prefix
+      if (!value.startsWith('http')) {
+        value = 'https://$value';
+      }
+      uri = Uri.parse(value);
     }
 
-    if (uri != null) {
-      if (await canLaunchUrl(uri)) {
-        await launchUrl(
-          uri,
-          mode: LaunchMode.externalApplication,
-          webOnlyWindowName: '_blank',
-        );
-      }
+    try {
+      // Directly calling launchUrl is often more reliable on Web than canLaunchUrl
+      await launchUrl(
+        uri,
+        mode: LaunchMode.externalApplication,
+      );
+    } catch (e) {
+      debugPrint('Could not launch $uri: $e');
     }
   }
 
