@@ -23,7 +23,7 @@ class WorkPage extends StatelessWidget {
             children: PortfolioData.experience.map((exp) => ExpCard(data: exp)).toList(),
           ),
         ),
-        const SizedBox(height: 80),
+        SizedBox(height: isDesktop ? 80 : 40),
         SizedBox(key: projectsKey),
         if (isDesktop) const DesktopPageTitle(label: "projects"),
         if (!isDesktop) const SectionLabel(label: "projects"),

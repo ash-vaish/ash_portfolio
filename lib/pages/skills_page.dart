@@ -19,6 +19,7 @@ class SkillsPage extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: isDesktop ? 0 : 20.0),
           child: GridView.builder(
             shrinkWrap: true,
+            padding: EdgeInsets.zero,
             physics: const NeverScrollableScrollPhysics(),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: isDesktop ? 3 : 2,

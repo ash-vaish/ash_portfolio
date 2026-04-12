@@ -121,14 +121,6 @@ class DesktopLayout extends StatelessWidget {
               letterSpacing: -0.5,
             ),
           ),
-          const SizedBox(height: 2),
-          Text(
-            PortfolioData.roleTag,
-            style: GoogleFonts.firaCode(
-              color: AppColors.textMuted,
-              fontSize: 12,
-            ),
-          ),
           const SizedBox(height: 10),
           Row(
             children: [

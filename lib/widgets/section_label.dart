@@ -40,7 +40,7 @@ class DesktopPageTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 28.0),
+      padding: const EdgeInsets.fromLTRB(0, 32.0, 0, 28.0),
       child: Row(
         children: [
           Container(

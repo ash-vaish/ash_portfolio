@@ -14,7 +14,7 @@ class HomePage extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(
         horizontal: isDesktop ? 0 : 20.0,
-        vertical: isDesktop ? 0 : 28.0,
+        vertical: isDesktop ? 40.0 : 28.0,
       ),
       child: isDesktop ? _buildDesktop(context) : _buildMobile(context),
     );

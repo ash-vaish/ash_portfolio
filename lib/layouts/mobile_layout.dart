@@ -101,14 +101,17 @@ class MobileLayout extends StatelessWidget {
         child: Column(
           children: [
             HomePage(key: homeKey, isDesktop: false),
+            const SizedBox(height: 20),
             WorkPage(key: workKey, projectsKey: projectsKey, isDesktop: false),
+            const SizedBox(height: 20),
             SkillsPage(
               key: skillsKey,
               isDesktop: false,
               animationController: skillsAnimationController,
             ),
+            const SizedBox(height: 20),
             ContactPage(key: contactKey, isDesktop: false),
-            const SizedBox(height: 100), // Extra space for bottom nav
+            const SizedBox(height: 120), // Extra space for bottom nav
           ],
         ),
       ),
