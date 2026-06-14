@@ -91,20 +91,20 @@ class PortfolioData {
   static const String initials = "AV";
   static const String roleTag = "flutter_developer.dart";
   static const String statusText = "available_for_hire";
-  static const String heroComment = "Flutter Developer · 4+ years · Noida, IN";
+  static const String heroComment = "Flutter Developer · 4.5+ years · Noida, IN";
   static const String heroTaglineStart = "Building ";
   static const String heroTaglineBold = "production-grade";
-  static const String heroTaglineEnd = " cross-platform apps. From AI tutors to government portals — real apps, real users.";
-  static const String sidebarFooter = "// Noida, IN\n// 4+ yrs · 4 apps live\n// Flutter · Dart · Firebase";
+  static const String heroTaglineEnd = " cross-platform apps. From healthcare solutions to government portals — real apps, real users.";
+  static const String sidebarFooter = "// Noida, IN\n// 4.5+ yrs · 4 apps live\n// Flutter · Dart · Java";
 
   static final List<PillData> pills = [
     PillData(dotColor: AppColors.flutterCyan, label: "iOS · Android · Web"),
     PillData(dotColor: AppColors.dartTeal, label: "Clean Architecture"),
-    PillData(dotColor: AppColors.accentRed, label: "BloC · Riverpod"),
+    PillData(dotColor: AppColors.accentRed, label: "BloC · Provider"),
   ];
 
   static final List<MetricData> metrics = [
-    MetricData(value: "4+", label: "YRS EXP", color: AppColors.flutterCyan),
+    MetricData(value: "4.5+", label: "YRS EXP", color: AppColors.flutterCyan),
     MetricData(value: "4", label: "APPS LIVE", color: AppColors.dartTeal),
     MetricData(value: "3", label: "COMPANIES", color: AppColors.accentRed),
   ];
@@ -117,9 +117,9 @@ class PortfolioData {
       role: "Associate Consultant",
       badge: "● live",
       badgeType: BadgeType.live,
-      company: "Infosys × Income Tax Dept.",
-      desc: "Building Aaykar Setu (national IT app) & Ask Madhukar AI chatbot for tax law queries.",
-      chips: ["Flutter", "Geo APIs", "AI", "Aug 2025–Now"],
+      company: "Infosys (Income Tax Dept.)",
+      desc: "Developed Aaykar Setu (National IT App) with Acts, Rules, FCM notifications, and AI Chatbot integration.",
+      chips: ["Flutter", "FCM", "Maps API", "Aug 2025–Now"],
     ),
     ExperienceData(
       icon: Icons.auto_stories_rounded,
@@ -129,64 +129,66 @@ class PortfolioData {
       badge: "2024–2025",
       badgeType: BadgeType.prev,
       company: "uCertify Training & Learning",
-      desc: "Built uCertify Learn+ & AI Tutor. Improved LMS integration by 20%.",
-      chips: ["Flutter", "Firebase", "BigQuery"],
+      desc: "Built uCertify Learn+ & AI Tutor. Improved LMS integration by 20% and used BigQuery for engagement insights.",
+      chips: ["Flutter", "Firebase", "BigQuery", "July 24–July 25"],
     ),
     ExperienceData(
       icon: Icons.favorite_rounded,
       iconBg: const Color(0x1AFF6B6B),
       isCurrent: false,
-      role: "Software Engineer L3",
+      role: "Software Engineer - 3",
       badge: "2021–2024",
       badgeType: BadgeType.prev,
       company: "Zimetrics Technologies",
-      desc: "Carelink Connect for Medtronic. App size ↓10%, downloads ↑15%, reviews ↑1.5×.",
-      chips: ["Flutter", "BloC", "FCM"],
+      desc: "Carelink Connect for Medtronic. Optimized app size by 10% and improved performance with BloC & Clean Arch.",
+      chips: ["Flutter", "BloC", "Architecture", "Aug 21–June 24"],
     ),
   ];
 
   static final List<ProjectData> projects = [
     ProjectData(
+      icon: Icons.edit_note_rounded,
+      accentColor: const Color(0xFF6C63FF),
+      title: "Writer.",
+      subtitle: "Handwriting conversion tool with 300K+ downloads",
+      playStoreUrl: "https://play.google.com/store/apps/details?id=in.ashprog.assignmentwriter",
+    ),
+    ProjectData(
       icon: Icons.account_balance_rounded,
       accentColor: AppColors.flutterCyan,
       title: "Aaykar Setu",
-      subtitle: "National IT office discovery + tax rules app",
-      playStoreUrl: "https://play.google.com/store/apps/details?id=in.gov.incometax.aaykarsetu",
-    ),
-    ProjectData(
-      icon: Icons.school_rounded,
-      accentColor: AppColors.dartTeal,
-      title: "uCertify Learn+",
-      subtitle: "AI-powered e-learning with labs & test prep",
-      appStoreUrl: "https://apps.apple.com/app/ucertify-learn/id123456789",
-      playStoreUrl: "https://play.google.com/store/apps/details?id=com.ucertify.learn",
+      subtitle: "Official Income Tax Department app for Acts & Rules",
+      appStoreUrl: "https://apps.apple.com/us/app/aaykar-setu/id6760544459",
+      playStoreUrl: "https://play.google.com/store/apps/details?id=com.taxmann.aayakarsetu",
     ),
     ProjectData(
       icon: Icons.monitor_heart_rounded,
       accentColor: AppColors.accentRed,
       title: "Carelink Connect",
-      subtitle: "Real-time glucose monitoring for Medtronic",
-      appStoreUrl: "https://apps.apple.com/app/carelink-connect/id999999999",
-      playStoreUrl: "https://play.google.com/store/apps/details?id=com.medtronic.carelink.connect",
+      subtitle: "Real-time glucose monitoring for Medtronic patients",
+      appStoreUrl: "https://apps.apple.com/us/app/carelink-connect-us/id1535972481",
+      playStoreUrl: "https://play.google.com/store/apps/details?id=com.medtronic.diabetes.carepartner.us",
     ),
     ProjectData(
-      icon: Icons.psychology_rounded,
-      accentColor: const Color(0xFFFFB83C),
-      title: "Ask Madhukar",
-      subtitle: "AI chatbot for Indian tax law queries",
+      icon: Icons.school_rounded,
+      accentColor: AppColors.dartTeal,
+      title: "uCertify Learn+",
+      subtitle: "AI-powered e-learning platform with hands-on labs",
+      appStoreUrl: "https://apps.apple.com/in/app/ucertify-learn/id1505460373",
+      playStoreUrl: "https://play.google.com/store/apps/details?id=com.flutter.ucertifyLearn",
     ),
   ];
 
   static final List<SkillData> skills = [
     SkillData(name: "Flutter/Dart", pct: 95, barColor: AppColors.flutterCyan),
-    SkillData(name: "Firebase", pct: 90, barColor: AppColors.dartTeal),
-    SkillData(name: "BloC/Riverpod", pct: 88, barColor: AppColors.flutterCyan),
-    SkillData(name: "REST/Dio", pct: 85, barColor: AppColors.dartTeal),
-    SkillData(name: "Clean Arch", pct: 83, barColor: AppColors.accentRed),
-    SkillData(name: "CI/CD", pct: 78, barColor: AppColors.flutterCyan),
-    SkillData(name: "Dart/OOP", pct: 92, barColor: AppColors.dartTeal),
-    SkillData(name: "Git/GitHub", pct: 88, barColor: AppColors.accentRed),
-    SkillData(name: "SQLite/Hive", pct: 80, barColor: AppColors.flutterCyan),
+    SkillData(name: "Java/Kotlin", pct: 85, barColor: AppColors.dartTeal),
+    SkillData(name: "BloC/Provider", pct: 92, barColor: AppColors.flutterCyan),
+    SkillData(name: "Firebase/FCM", pct: 90, barColor: AppColors.dartTeal),
+    SkillData(name: "Clean Architecture", pct: 88, barColor: AppColors.accentRed),
+    SkillData(name: "REST APIs/Dio", pct: 90, barColor: AppColors.flutterCyan),
+    SkillData(name: "SQLite/Hive", pct: 85, barColor: AppColors.dartTeal),
+    SkillData(name: "Unit/Widget Testing", pct: 80, barColor: AppColors.accentRed),
+    SkillData(name: "CI/CD/Git", pct: 88, barColor: AppColors.flutterCyan),
   ];
 
   static final List<ContactData> contacts = [
@@ -194,19 +196,19 @@ class PortfolioData {
       icon: Icons.email_rounded,
       iconBg: const Color(0x1A44D4FA),
       label: "Email",
-      value: "ashish.vaish@email.com",
+      value: "ashvaish8081@gmail.com",
     ),
     ContactData(
       icon: Icons.business_rounded,
       iconBg: const Color(0x1A3DC8A0),
       label: "LinkedIn",
-      value: "linkedin.com/in/ashishvaish",
+      value: "linkedin.com/in/ash-vaish",
     ),
     ContactData(
       icon: Icons.code_rounded,
       iconBg: const Color(0x1AFF6B6B),
       label: "GitHub",
-      value: "github.com/ashishvaish",
+      value: "github.com/ash-vaish",
     ),
     ContactData(
       icon: Icons.place_rounded,
