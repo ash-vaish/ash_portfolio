@@ -129,7 +129,7 @@ class _ContactItemState extends State<ContactItem> {
     );
   }
 
-  IconData _getIcon(String label) {
+  FaIconData _getIcon(String label) {
     switch (label.toLowerCase()) {
       case 'email':
         return FontAwesomeIcons.envelope;

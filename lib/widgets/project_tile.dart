@@ -111,7 +111,7 @@ class _ProjectTileState extends State<ProjectTile> {
 }
 
 class _StoreButton extends StatefulWidget {
-  final IconData icon;
+  final FaIconData icon;
   final String url;
   final bool isActive;
 
